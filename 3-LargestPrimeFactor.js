@@ -1,27 +1,40 @@
 function LargestPrime() {
-    let number = 600851475143;
-    let A = number - 1;
+    // let number = 600851475143;
+    const number = 3453;
 
-    for (let i = A; i > 1; i--) {
-        let prime = CheckPrime(i);
-        if (prime) {
-            console.log(i);
-            break;
+    let sqRoot = Math.ceil(Math.sqrt(number) + 1);
+
+    // console.log(sqRoot);
+    let i = 1;
+
+    let largestPrime = 1;
+
+    while ( i <= sqRoot ) {
+        if (number % i == 0 ) {
+            if ( CheckPrime(i) && i > largestPrime) {
+                largestPrime = i
+            }
+            let oppositeFactor = number / i;
+            if ( CheckPrime( oppositeFactor ) && oppositeFactor > largestPrime) {
+                largestPrime = oppositeFactor
+            }
         }
+        i++;
     }
+
+    console.log(largestPrime);
 }
 
 LargestPrime();
 
 function CheckPrime(num) {
     let B = num - 1;
-    let isPrime = true;
 
     while (B != 1) {
         if (num % B == 0) {
-            isPrime = false;
+            return false;
         }
         B--;
     }
-    return isPrime;
+    return true;
 }
